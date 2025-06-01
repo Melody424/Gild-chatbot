@@ -1,0 +1,83 @@
+﻿Company,Job Title,Job Description,Job Keywords,Job URL
+Stark Tech 鷹翔有限公司,Python 實習生  – 資料科學/AI 應用方向,"【關於我們 - Stark Tech】
+Stark Tech 致力於成為傳統產業與數位科技之間的橋樑。我們深入理解各行業的場景與商業模式，為客戶提供高效、實用且高性價比的數位化解決方案，協助企業提升經營效率，並擁抱現代化的消費趨勢。以行業場景為核心，我們打造高度客製化的解決方案，結合對技術品質的堅持，成功開發出多個可規模化的行業應用。
+我們的影響力橫跨：
+🏨 旅遊休閒｜🏥 智慧醫療｜🛍️ 新零售｜📱 電子商務｜🥬 生鮮供應｜📺 數位媒體｜💰 金融科技
+💼 工作職責
+資料處理管道設計與開發
+- 使用 Python 與 BigQuery SQL 協助開發及維護資料處理流程，確保機器學習模型獲取高品質資料。
+機器學習模型訓練與資料標記
+- 協助進行初階模型訓練作業，學習如何準備、標記與驗證資料，參與模型優化與效果評估流程。
+ETL/ELT 工作流程構建
+- 在實習期間輔助建立並優化 ETL/ELT 流程，協助確保資料自動化處理與數據一致性，並深入瞭解資料清洗與轉換的過程。
+RAG 系統認識與輔助實作
+- 學習並輔助應用 RAG（檢索增強生成）技術，了解其在提升 AI 互動準確性與上下文相關性方面的運作原理。
+向量資料庫基礎與查詢優化
+- 認識向量資料庫（如 Pinecone、Qdrant）的基本概念，並在輔導下參與 SQL/BigQuery 查詢效能的基礎優化工作。
+API 建構與維護
+- 使用 Python 框架（FastAPI、Flask）在指導下建立及維護簡易資料處理與 AI 服務 API，累積實務開發經驗。
+機器學習模型與資料管道部署
+- 在雲端基礎架構（主要以 GCP 為主，並整合部分 AWS）上部署 ML 模型與資料管道，了解 MLOps 原則與基本部署流程。",實習、AI 開發工程師、資料工程師,https://www.cake.me/companies/StarkTech/jobs/python-intern-data-science-ai-applications
+Alpha Intelligence 新愛世科技股份有限公司,全端實習生(限學生),"【職務簡介】
+我們正在尋找對產品開發有熱情的實習生，協助優化現有系統並參與新功能開發。
+這份實習將讓你實際參與真實產品的開發與上線流程，並學習如何運用 Ruby on Rails、Angular、Python 等業界常用技術解決實際問題。
+【工作內容】
+協助開發、除錯並優化後台系統與使用者端功能。
+實習期間將視個人能力安排實際參與正在營運中的產品功能開發，並接觸需求分析與實作流程。
+撰寫簡單測試與文件，確保功能正確運作與可維護性。
+參與團隊內部討論、Issue 管理與 code review。
+根據需求，自主學習並善用 AI 工具（如 ChatGPT, Copilot, Cursor）輔助開發。
+【必要條件】
+具備實作過任一程式語言的經驗（如 Python、Angular 或其他前端框架）。
+對 Web 開發有興趣，願意學習新的語言與框架（如 Ruby on Rails、Angular 等）。
+能理解基礎程式邏輯與思考流程。
+樂於主動提出與解決問題，可自行查資料或問 AI 。
+【加分條件】（不是必備，有會更好）
+有 GitHub 或 Side Project 可展示。
+使用過 Git / GitHub 做過簡單協作。
+有基礎前端經驗（HTML/CSS/JavaScript 或框架如 Vue/React/Angular）。
+有後端或資料庫基礎（如 Python Flask、Rails、PostgreSQL）。
+有使用 AI 工具輔助開發經驗。
+具備團隊開發、校內專題經驗。
+【實習條件】
+實習期間至少 6 個月以上
+每週配合 3-5 天
+此職缺非短期、寒/暑假工讀
+歡迎大三升大四、大四(含)以上同學投遞履歷
+【團隊與文化】
+團隊目前使用技術包含 Ruby on Rails、Python、Angular，專注於產品開發與實際落地。
+團隊氛圍開放且扁平，有問題隨時能提出討論。我們重視實作經驗與持續學習，也鼓勵主動分享與協作。
+實習生會直接參與專案，有 mentor 協助。",,https://www.cake.me/companies/alphaintelligence/jobs/full-service-intern-students-only
+Crypto-Arsenal（奇策智能雲端股份有限公司）,※學習型※ Web3 - App UI/UX 培訓/實習設計師【免費培訓/無給薪實習（Free Training/Unpaid Internship）】,"本學習型實習計劃針對以下三種人才所設計：
+想轉職成為符合業界標準具即戰力的 UIUX 與 PO 人才
+尚在學學生希望在畢業前體驗業界實務經驗，並累積作品集
+已在職 Web2 UIUX 設計師，想要轉換跑道到 Web3 產業
+※此網站是我們指導培訓實習生（UIUX 和 前後端）在六個月內開發出來的實際上線營運 SaaS 軟體模組※
+https://www.zke.com/en_US/strategyca
+招收對以下有興趣者：
+Web / App UI Design
+UX / Design Thinking
+區塊鏈、量化交易自動化服務平台與軟體服務開發之 UX 研究、UI 設計
+徵選標準：
+Figma 有基礎能力，包括：variants、auto layout、 parent and child components 等
+※ 表現優異者，有機會晉升為 PO 成為 π 型人才，並轉為 Paid Intern / 正職人員（有開缺時）
+※ 請注意：此為《學習型無給薪（unpaid）培訓/實習》，為期 9 個月，每週工時至少 24 小時（可彈性分配時間），可配合學校簽訂契約、實習學分證明和推薦信（表現需具備一定水準者），無法接受者，請勿投遞，謝謝！",Figma基礎功能、figma(學習中),https://www.cake.me/companies/crypto-arsenal/jobs/75a2d3
+Crypto-Arsenal（奇策智能雲端股份有限公司）,※學習型※ Web3 前、後端軟體研發、DeFi 協議設計、ZKP 研究培訓/實習生【免費培訓/無給薪實習（Free Training/Unpaid Internship）】,"本學習型實習計劃針對以下兩種人才所設計：
+想轉職成為符合業界標準具即戰力的 Web3 軟體開發人才
+尚在學學生希望在畢業前體驗業界實務經驗，並累積 Github 作品集
+※此網站是我們指導培訓實習生（UIUX 和 前後端）在六個月內開發出來的實際上線營運 SaaS 軟體模組※
+https://www.zke.com/en_US/strategyca
+招收對以下有興趣者：
+區塊鏈前後端 Web App 開發與維護
+DeFi 相關協議之研究與開發
+ZKP / ZKVM之研究與開發
+學習量化交易知識與免費使用公司自動交易服務
+※ ITRI、Apple、Tesla 技術高手親自指導（Pair Programming），幫助你學習國外最新 SaaS 與 Blockchain 軟體開發之思維與實戰
+※ 表現優異者，有機會轉 Paid Intern / 正職（有開職缺時）/ 成為新 Web3 創業團隊創始成員
+※ 請注意：此為學習型無薪實習，為期六~十二個月，可配合學校簽訂契約、實習證明和推薦信（表現需具備一定水準者），《
+無法接受者，請勿投遞
+》，謝謝！",javescript、React.js、TypeScript,https://www.cake.me/companies/crypto-arsenal/jobs/8b1a72
+社團法人XChange互聯網交流協會,XChange 2024 夏季招募,"XChange 2024 夏季招募開跑 #強力招募經營夥伴中
+XChange 是全台灣最大的互聯網工作者社群，致力於擴大台灣社群人才在全球的影響力。團隊核心成員來自Google、Facebook、Alibaba、Tencent、ByteDance、LINE 等頂尖互聯網公司；擁有國際級城市的分社，包含台北、東京、新加坡、香港、北京、上海、杭州、曼谷、雅加達，促進跨國互聯網人才交流！！
+從2016走到今天，我們完成舉辦100+實體/線上講座，影響10000+與會者。發布100+ Medium 深度文章、 經營Podcast專業乾貨，主題涵蓋海內外求職/BD/MKT/PM/UIUX/OP/成長心法/產業大神分享。另外，培訓近百位學員，協助拿到騰訊、亞馬遜、Popdaily 等實習/正職offer。
+若你對於上述內容感興趣，也渴望突破舒適圈、拓展互聯網人脈、透過社群創造價值，那就絕對不要錯過這次招募！邀請你和我們一起創造有意義交流、增加 Side Project 實戰經驗。",Voluntary Work、SideProject、XChange,https://www.cake.me/companies/xchange/jobs/xchange-2024-summer-recruitment

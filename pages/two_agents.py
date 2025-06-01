@@ -1,5 +1,6 @@
 import streamlit as st
 from openai import OpenAI
+from coding.utils import paging
 import time
 import re
 from dotenv import load_dotenv
@@ -31,7 +32,7 @@ def clean_text(text):
 
 # UI 設定
 placeholderstr = "請輸入你會的技能（例如 Python）"
-user_name = "Melody"
+user_name = "王妍榛"
 user_image = "https://www.w3schools.com/howto/img_avatar.png"
 
 # 設定 LLM config
@@ -60,7 +61,6 @@ with llm_config_gemini:
         )
     )
 
-
 # 讀入資料
 df = pd.read_csv('pages/jobsthousands.csv')
 
@@ -68,7 +68,7 @@ def get_jobs_by_skill(skill):
     matched = df[df["job_tags"].str.contains(skill, case=False, na=False)]
     if matched.empty:
         return "目前沒有符合該技能的職缺，請嘗試其他技能。"
-    return "\n".join([f"{row['comp_name']} - {row['job_name']}，技能需求：{row['job_tags']}" for _, row in matched.iterrows()])
+    return "\n".join([f"{row['comp']} - {row['job_title']}，技能需求：{row['job_tags']}" for _, row in matched.iterrows()])
 
 def generate_response(prompt):
     job_info = get_jobs_by_skill(prompt)
@@ -89,10 +89,7 @@ def stream_data(stream_str):
 def save_lang():
     st.session_state['lang_setting'] = st.session_state.get("language_select")
 
-def paging():
-    st.page_link("streamlit_app.py", label="Home", icon="🏠")
-    st.page_link("pages/two_agents.py", label="Two Agents' Talk", icon="💭")
-    st.page_link("pages/job_cleaner.py", label="Job Cleaner", icon= "🧹")
+
 
 def main():
     st.set_page_config(
@@ -161,3 +158,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+

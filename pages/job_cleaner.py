@@ -11,11 +11,7 @@ from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from autogen import AssistantAgent, LLMConfig
 from tqdm import tqdm
-
-def paging():
-    st.page_link("streamlit_app.py", label="Home", icon="🏠")
-    st.page_link("pages/two_agents.py", label="Two Agents' Talk", icon="💭")
-    st.page_link("pages/job_cleaner.py", label="Job Cleaner", icon="🧹")
+from coding.utils import paging
 
 def save_lang():
     st.session_state['lang_setting'] = st.session_state.get("language_select")
