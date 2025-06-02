@@ -25,7 +25,7 @@ def persona_name(image_path):
     draw = ImageDraw.Draw(img)
 
     # Step 3: 字型設定
-    font_path = "pages/Montserrat-Bold.ttf"
+    font_path = "/workspaces/Gild-chatbot/pages/Montserrat-Bold.ttf"
     font_size = 60
     font = ImageFont.truetype(font_path, font_size)
 
@@ -559,7 +559,6 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from io import BytesIO
 
-pdfmetrics.registerFont(TTFont("Montserrat", "/workspaces/Gild-chatbot/pages/Montserrat-Bold.ttf"))
 
 
 def create_pdf_with_resources_on_image(
