@@ -9,7 +9,7 @@ def paging():
     st.page_link("pages/two_agents.py", label="Two Agents' Talk", icon="💭")
     st.page_link("pages/one_agent.py", label="One Agent' Talk", icon="🧑🏻‍🏫")
     st.page_link("pages/job_cleaner.py", label="Job Cleaner", icon= "🧹")
-    st.page_link("pages/test.py", label= "test")
+    st.page_link("pages/test.py", label= "Ideal Persona", icon= "🧠" )
 
 def display_session_msg(container_obj, user_image: Optional[str] = None):
     # Initialize messages list if not present

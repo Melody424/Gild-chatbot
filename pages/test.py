@@ -4,6 +4,7 @@ from coding.utils import paging
 from io import BytesIO
 import os
 from coding.persona_tools import persona_name, persona_title, get_clean_titles, format_titles_centered
+from coding.persona_tools import extract_all_hard_skills_as_text, persona_hardskill, persona_softskill, extract_all_soft_skills_as_text
 import pandas as pd
 
 
@@ -14,7 +15,7 @@ user_image = "https://www.w3schools.com/howto/img_avatar.png"
 
 
 def main():
-    st.title("🧑‍💼 Test")        
+    st.title("🧑‍💼 Ideal Persona")        
     
     with st.sidebar:
         paging()
@@ -41,6 +42,11 @@ def main():
 
     # 疊加職稱
     img = persona_title(img, cleaned_raw)
+
+    hard_skills = extract_all_hard_skills_as_text("pages/saved_jobs.csv")
+    persona_hardskill(img, hard_skills)
+    soft_skills = extract_all_soft_skills_as_text("pages/saved_jobs.csv")
+    persona_softskill(img, soft_skills)
 
     # 圖片轉 BytesIO 用於顯示與下載
     img_bytes = BytesIO()

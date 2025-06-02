@@ -6,3 +6,4 @@ ag2[gemini]
 ag2[openai]
 beautifulsoup4
 streamlit-aggrid
+google-generativeai

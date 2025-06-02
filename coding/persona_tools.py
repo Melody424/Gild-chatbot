@@ -67,7 +67,7 @@ def get_clean_titles(job_titles: list[str]) -> str:
 
     llm_config = LLMConfig(
         api_type="google",
-        model="gemini-1.5-flash",
+        model="gemini-2.0-flash-lite",
         api_key=GEMINI_API_KEY,
     )
 
@@ -147,12 +147,210 @@ def persona_title(img, raw_titles_text, width=30):
     return img
 
 
+from typing import List
+import pandas as pd
+from autogen import ConversableAgent, UserProxyAgent, LLMConfig
+import os
 
-# 範例用法
-if __name__ == "__main__":
-    df = pd.read_csv("pages/saved_jobs.csv")
-    job_titles = df["Job Title"].dropna().tolist()
-    cleaned_raw = get_clean_titles(job_titles)
-    print(format_titles_centered(cleaned_raw))
+def extract_hard_skills_from_text(keywords: str, description: str) -> str:
+    if not GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY is missing")
+
+    llm_config = LLMConfig(
+        api_type="google",
+        model="gemini-2.0-flash-lite",
+        api_key=GEMINI_API_KEY,
+    )
+
+    prompt_template = """
+你是一位協助學生解析實習職缺的 AI 助理，請根據輸入的職缺資訊，幫助學生萃取出「重要的硬技能（hard skills）」，這些技能應該是學生應該學會或具備的，通常是工具、語言、技術、平台或數據分析能力，例如：Python、Excel、SQL、Tableau、Canva、A/B testing 等。
+
+請依據以下規則處理：
+1. 統整 job keywords 與 job description 中出現的技能
+2. 僅保留硬技能，排除軟技能（如溝通能力、團隊合作）
+3. 以英文逗號分隔，例如：Python, Excel, SQL, Tableau
+4. 移除重複項目，並盡可能標準化技能名稱（例如 Excel 表格處理 ➝ Excel）
+5. 如果是Microsoft Office系列，Word, PowerPoint, Excel都有的話，請幫我以Microsoft Office表示，如果Word, PowerPoint, Excel沒有同時出現還次可以顯示單一項目
+6. 回傳最多四個你覺得最相關的
+7. 全部用英文回應
+8. 最多兩個英文字，Social Media Platform或Social Media Marketing都保留Social Media就好
+
+以下是職缺資訊：
+---
+Job Keywords:
+{keywords}
+
+Job Description:
+{description}
+---
+請回傳這些職缺所需的硬技能清單（以英文逗號分隔）：
+"""
+
+    final_prompt = prompt_template.format(keywords=keywords, description=description)
+
+    gemini_agent = ConversableAgent(
+        name="Gemini",
+        llm_config=llm_config,
+        system_message="你是負責萃取實習硬技能的助手"
+    )
+
+    user = UserProxyAgent(
+        name="user",
+        human_input_mode="NEVER",
+        max_consecutive_auto_reply=0
+    )
+
+    chat_result = user.initiate_chat(
+        recipient=gemini_agent,
+        message=final_prompt
+    )
+
+    for msg in chat_result.chat_history:
+        if msg["role"] == "user":
+            return msg["content"]
+
+    return ""
+
+def extract_all_hard_skills_as_text(csv_path: str) -> str:
+    df = pd.read_csv(csv_path)
+    all_keywords = " ".join(df["Job Keywords"].dropna().astype(str).tolist())
+    all_descriptions = " ".join(df["Job Description"].dropna().astype(str).tolist())
+    return extract_hard_skills_from_text(all_keywords, all_descriptions)
+
+def persona_title(img, raw_titles_text, width=30):
+
+    draw = ImageDraw.Draw(img)
+
+    # 字型設定（可和名字不同大小）
+    font_path = "pages/Montserrat-Bold.ttf"
+    font_size = 23
+    font = ImageFont.truetype(font_path, font_size)
+
+    # 處理文字：中間對齊 + 拆行
+    titles = [t.strip() for t in raw_titles_text.split(",") if t.strip()]
+    centered_titles = [t.center(width) for t in titles]
+
+    # 起始位置（你可以自己微調）
+    start_x = 130
+    start_y = 450
+    line_spacing = 35
+
+    # 每行畫上去
+    for i, line in enumerate(centered_titles):
+        y = start_y + i * line_spacing
+        draw.text((start_x, y), line, font=font, fill="#2c606d")
+
+    return img
+
+def persona_hardskill(img: Image.Image, hard_skills: str) -> Image.Image:
+    draw = ImageDraw.Draw(img)
+
+    # 字型設定（可和名字不同大小）
+    font_path = "pages/Montserrat-Bold.ttf"
+    font_size = 20
+    font = ImageFont.truetype(font_path, font_size)
+
+    skills_list = [skill.strip() for skill in hard_skills.split(",") if skill.strip()]
+    bullet = u"\u2022"  # 黑圓點
+
+     # 起始位置（你可以自己微調）
+    start_x = 535
+    start_y = 260
+    line_spacing = 30
+
+#    for i in skills_list:
+    for i, skill in enumerate(skills_list):
+        y = start_y + i * line_spacing
+        draw.text((start_x, y), f"{bullet} {skill}", fill="#2c606d", font=font)
+
+    return img
+
+
+def extract_soft_skills_from_text(keywords: str, description: str) -> str:
+    if not GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY is missing")
+
+    llm_config = LLMConfig(
+        api_type="google",
+        model="gemini-2.0-flash-lite",
+        api_key=GEMINI_API_KEY,
+    )
+
+    prompt_template = """
+你是一位協助學生解析實習職缺的 AI 助理，請根據輸入的職缺資訊，幫助學生萃取出「重要的軟技能（soft skills）」，這些技能通常是個人特質、工作態度、人際互動與職場通用能力，例如：Communication, Teamwork, Problem Solving, Adaptability, Time Management 等。
+請依據以下規則處理：
+1. 統整 job keywords 與 job description 中出現的軟技能
+2. 僅保留軟技能，排除工具、程式語言、技術平台等硬技能（如：Python、Excel、SQL 不要包含）
+3. 以英文逗號分隔，例如：Communication, Teamwork, Problem Solving
+4. 移除重複項目，並儘可能標準化技能名稱（例如：Good communication skills ➝ Communication）
+5. 如果有多種描述方式，請保留最常見、最代表性的表述方式（例如：Team collaboration、Team player ➝ Teamwork）
+6. 保留你覺得最相關的四個
+7. 全部用英文回應
+
+以下是職缺資訊：
+---
+Job Keywords:
+{keywords}
+
+Job Description:
+{description}
+---
+請回傳這些職缺所需的軟技能清單（以英文逗號分隔）：
+"""
+
+    final_prompt = prompt_template.format(keywords=keywords, description=description)
+
+    gemini_agent = ConversableAgent(
+        name="Gemini",
+        llm_config=llm_config,
+        system_message="你是負責萃取實習硬技能的助手"
+    )
+
+    user = UserProxyAgent(
+        name="user",
+        human_input_mode="NEVER",
+        max_consecutive_auto_reply=0
+    )
+
+    chat_result = user.initiate_chat(
+        recipient=gemini_agent,
+        message=final_prompt
+    )
+
+    for msg in chat_result.chat_history:
+        if msg["role"] == "user":
+            return msg["content"]
+
+    return ""
+
+def extract_all_soft_skills_as_text(csv_path: str) -> str:
+    df = pd.read_csv(csv_path)
+    all_keywords = " ".join(df["Job Keywords"].dropna().astype(str).tolist())
+    all_descriptions = " ".join(df["Job Description"].dropna().astype(str).tolist())
+    return extract_soft_skills_from_text(all_keywords, all_descriptions)
+
+
+def persona_softskill(img: Image.Image, soft_skills: str) -> Image.Image:
+    draw = ImageDraw.Draw(img)
+
+    # 字型設定（可和名字不同大小）
+    font_path = "pages/Montserrat-Bold.ttf"
+    font_size = 20
+    font = ImageFont.truetype(font_path, font_size)
+
+    skills_list = [skill.strip() for skill in soft_skills.split(",") if skill.strip()]
+    bullet = u"\u2022"  # 黑圓點
+
+     # 起始位置（你可以自己微調）
+    start_x = 795
+    start_y = 315
+    line_spacing = 28
+
+#    for i in skills_list:
+    for i, skill in enumerate(skills_list):
+        y = start_y + i * line_spacing
+        draw.text((start_x, y), f"{bullet} {skill}", fill="#d7f8ff", font=font)
+
+    return img
 
 
