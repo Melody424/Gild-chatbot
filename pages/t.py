@@ -1,5 +1,15 @@
 import ast
 import pandas as pd
+from PIL import Image, ImageDraw, ImageFont
+import streamlit as st
+import autogen
+from autogen import ConversableAgent, LLMConfig, Agent
+from autogen import AssistantAgent, UserProxyAgent, LLMConfig
+from autogen.code_utils import content_str
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+
 
 job_df = pd.read_csv("pages/jobsthousands.csv")
 job_df.fillna("", inplace=True)
@@ -443,5 +453,61 @@ def main():
     with st.sidebar:
         paging()
 
-if __name__ == "__main__":
-    main()
+
+load_dotenv(override=True)
+GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', None)
+
+def get_ai_resources(role: str, skills: str) -> str:
+    if not GEMINI_API_KEY:
+        raise ValueError("GEMINI_API_KEY is missing")
+
+    llm_config = LLMConfig(
+        api_type="google",
+        model="gemini-2.0-flash-lite",
+        api_key=GEMINI_API_KEY,
+    )
+
+    prompt_template = """
+你是一位職涯輔導專家，請根據學生輸入的「想從事職位」與「具備或想加強的技能」，推薦 1~2 個最適合的學習資源（包含文章、影片、教學、指南等），以幫助學生培養進入該職位所需的能力。
+
+請依照以下格式與規則回應：
+1. 每個推薦請包含：
+    - 資源名稱（標題）
+    - 資源出處（文章 / YouTube / 課程 / 書籍）
+    - 資源連結（可用真實連結或範例連結）
+2. 資源要與角色與技能強相關，不要太通用。
+3. 文字全部以英文回覆。
+4. 每筆用 `•` 開頭表示，方便轉為圖片或 PDF 使用。
+
+角色（Role）: {role}
+技能（Skills）: {skills}
+
+請開始推薦：
+"""
+
+    prompt = prompt_template.format(role=role, skills=skills)
+
+    gemini_agent = ConversableAgent(
+        name="GeminiResourceRecommender",
+        llm_config=llm_config,
+        system_message="你是職涯學習資源推薦專家。"
+    )
+
+    user = UserProxyAgent(
+        name="user",
+        human_input_mode="NEVER",
+        max_consecutive_auto_reply=0
+    )
+
+    chat_result = user.initiate_chat(
+        recipient=gemini_agent,
+        message=prompt
+    )
+
+    for msg in chat_result.chat_history:
+        if msg["role"] == "user":
+            return msg["content"]
+
+    return "No AI resources found."
+
+

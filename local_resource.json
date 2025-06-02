@@ -1,0 +1,33 @@
+{
+  "Data Analyst": [
+    {
+      "title": "SQL for Data Analysis",
+      "type": "YouTube",
+      "url": "https://www.youtube.com/watch?v=xyz123"
+    },
+    {
+      "title": "Python Basics",
+      "type": "Course",
+      "url": "https://www.example.com/python-course"
+    }
+  ],
+  "Product Manager": [
+    {
+      "title": "PM Interview Guide",
+      "type": "Article",
+      "url": "https://medium.com/pm-guide"
+    }
+  ],
+  "Marketing": [
+    {
+      "title": "SEO for Beginners: A Step-by-Step Guide",
+      "type": "Article",
+      "url": "https://yoast.com/beginners-guide-seo/"
+    },
+    {
+      "title": "Social Media Marketing in 5 minutes",
+      "type": "YouTube",
+      "url": "https://youtu.be/I2pwcAVonKI?feature=shared"
+    }
+  ]
+}

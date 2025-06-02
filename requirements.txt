@@ -7,3 +7,5 @@ ag2[openai]
 beautifulsoup4
 streamlit-aggrid
 google-generativeai
+python-dotenv
+reportlab
