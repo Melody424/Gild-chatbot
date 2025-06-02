@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 
 def persona_name(image_path):
     # Step 1: 使用者輸入名字
-    name = st.text_input("Please enter your name", value="")
+    name = st.text_input("Please enter your name in English", value="")
 
     if not name:
         return None, None  # 尚未輸入名字就不繼續
